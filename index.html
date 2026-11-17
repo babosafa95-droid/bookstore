@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    
+
+
+    <!-- NAVIGATION -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">Book<span>Verse.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    🛒 Cart <span id="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="subtitle">YOUR DIGITAL BOOKSTORE</p>
+            <h1>Discover Your Next <span>Favorite Book.</span></h1>
+            <p class="hero-description">
+                Explore thousands of digital books.
+                Read, learn, and grow from anywhere.
+            </p>
+
+            <a href="#books" class="main-btn">Explore Books →</a>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=900"
+                 alt="Beautiful library">
+        </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="benefits">
+        <div class="benefit">
+            <span>📚</span>
+            <h3>Huge Collection</h3>
+            <p>Books for every interest.</p>
+        </div>
+
+        <div class="benefit">
+            <span>⚡</span>
+            <h3>Instant Access</h3>
+            <p>Get your books digitally.</p>
+        </div>
+
+        <div class="benefit">
+            <span>💻</span>
+            <h3>Read Anywhere</h3>
+            <p>Enjoy books on any device.</p>
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories" id="categories">
+        <div class="section-heading">
+            <p class="subtitle">EXPLORE</p>
+            <h2>Book Categories</h2>
+        </div>
+
+        <div class="category-list">
+            <button class="category-btn active" onclick="filterBooks('All', this)">All Books</button>
+            <button class="category-btn" onclick="filterBooks('Business', this)">Business</button>
+            <button class="category-btn" onclick="filterBooks('Technology', this)">Technology</button>
+            <button class="category-btn" onclick="filterBooks('Fiction', this)">Fiction</button>
+            <button class="category-btn" onclick="filterBooks('Self-Development', this)">Self Development</button>
+            <button class="category-btn" onclick="filterBooks('History', this)">History</button>
+        </div>
+    </section>
+
+    <!-- BOOK STORE -->
+    <section class="books-section" id="books">
+        <div class="section-heading">
+            <p class="subtitle">OUR COLLECTION</p>
+            <h2>Popular E-books</h2>
+            <p>Find the perfect book for your next adventure.</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="search-input"
+                   placeholder="Search by book title or author...">
+            <button onclick="searchBooks()">Search</button>
+        </div>
+
+        <div class="book-grid" id="book-grid">
+            <!-- Books are generated with JavaScript -->
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <p class="subtitle">ABOUT BOOKVERSE</p>
+            <h2>Knowledge Is Just One Click Away.</h2>
+            <p>
+                BookVerse is a digital bookstore created for people
+                who love reading, learning, and discovering new ideas.
+                Our goal is to make knowledge accessible to everyone.
+            </p>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+        <h2>Stay Updated!</h2>
+        <p>Discover new books and special offers.</p>
+
+        <form onsubmit="subscribe(event)">
+            <input type="email" id="email-input"
+                   placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="#" class="logo">Book<span>Verse.</span></a>
+        <p>© 2026 BookVerse. All rights reserved.</p>
+        <p>Made with ❤️ for book lovers.</p>
+    </footer>
+
+    <!-- SHOPPING CART -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+
+    <aside class="cart-panel" id="cart-panel">
+        <div class="cart-header">
+            <h2>Your Shopping Cart</h2>
+            <button class="close-btn" onclick="toggleCart()">✕</button>
+        </div>
+
+        <div id="cart-items" class="cart-items">
+            <p class="empty-cart">Your cart is empty.</p>
+        </div>
+
+        <div class="cart-footer">
+            <h3>Total: $<span id="cart-total">0.00</span></h3>
+            <button class="checkout-btn" onclick="openCheckout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- CHECKOUT MODAL -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="checkout-box">
+            <button class="close-btn" onclick="closeCheckout()">✕</button>
+            <h2>Complete Your Order</h2>
+            <p>Enter your details to continue.</p>
+
+            <form id="checkout-form" onsubmit="placeOrder(event)">
+                <input type="text" id="customer-name"
+                       placeholder="Full Name" required>
+                <input type="email" id="customer-email"
+                       placeholder="Email Address" required>
+
+                <div class="order-total">
+                    Order total: $<span id="checkout-total">0.00</span>
+                </div>
+
+                <button type="submit" class="checkout-btn">
+                    Place Order
+                </button>
+            </form>
+
+            <p class="notice">
+                Demo checkout only. No real payment is processed.
+            </p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    
+    <script src="script.js"></script>
+
+
+
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+
+
+     
+</html>
